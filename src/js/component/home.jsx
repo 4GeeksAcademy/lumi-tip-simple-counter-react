@@ -1,24 +1,35 @@
 import React from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faClock } from '@fortawesome/free-solid-svg-icons'
 
 //include images into your bundle
-import rigoImage from "../../img/rigo-baby.jpg";
+
 
 //create your first component
-const Home = () => {
+
+const Card = (props) => {
 	return (
-		<div className="text-center">
-			<h1 className="text-center mt-5">Hello Rigo!</h1>
-			<p>
-				<img src={rigoImage} />
-			</p>
-			<a href="#" className="btn btn-success">
-				If you see this green button... bootstrap is working...
-			</a>
-			<p>
-				Made by{" "}
-				<a href="http://www.4geeksacademy.com">4Geeks Academy</a>, with
-				love!
-			</p>
+		<div className="card p-3 mx-1">
+			<div className="card-body">
+				<h1 className="fs-5">{props.icon ? <FontAwesomeIcon icon={faClock} /> : props.number}</h1>
+			</div>
+		</div>
+	)
+}
+
+const Home = (props) => {
+	return (
+		<div className="d-flex justify-content-center">
+			<div className="d-flex">
+				<Card icon />
+				<Card number={Math.floor((props.count % 10000000) / 1000000)} />
+				<Card number={Math.floor((props.count % 1000000) / 100000)} />
+				<Card number={Math.floor((props.count % 100000) / 10000)} />
+				<Card number={Math.floor((props.count % 10000) / 1000)} />
+				<Card number={Math.floor((props.count % 1000) / 100)} />
+				<Card number={Math.floor((props.count % 100) / 10)} />
+				<Card number={props.count % 10} />
+			</div>
 		</div>
 	);
 };
